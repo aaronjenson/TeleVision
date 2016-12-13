@@ -1,0 +1,122 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             xmlns:rsb="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_gravity="bottom|center"
+             android:background="@android:color/white"
+             android:padding="10dp"
+             android:orientation="vertical"
+             android:weightSum="1"
+             tools:context="com.team3238.electro.television.CameraSettings"
+             android:layout_height="wrap_content"
+             android:id="@+id/camera_settings_fragment">
+
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarStyle="insideInset"
+            android:fillViewport="false">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:text="H Filter Value"
+                        android:layout_width="match_parent"
+                        android:paddingBottom="@dimen/default_vertical_padding"
+                        android:paddingTop="@dimen/default_vertical_padding"
+                        android:textSize="24sp"
+                        android:paddingRight="@dimen/default_horizontal_padding"
+                        android:paddingLeft="@dimen/default_horizontal_padding"
+                        android:layout_height="wrap_content"/>
+
+                <org.florescu.android.rangeseekbar.RangeSeekBar
+                        android:layout_width="match_parent"
+                        rsb:absoluteMaxValue="255"
+                        rsb:absoluteMinValue="0"
+                        rsb:textAboveThumbsColor="@android:color/holo_blue_dark"
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/hValueBar"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/default_horizontal_padding"
+                        android:paddingRight="@dimen/default_horizontal_padding"
+                        android:paddingTop="@dimen/default_vertical_padding"
+                        android:paddingBottom="@dimen/default_vertical_padding"
+                        android:scaleType="centerCrop"
+                        rsb:barHeight="4dp"
+                        rsb:showLabels="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:text="S Filter Value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/default_vertical_padding"
+                        android:paddingTop="@dimen/default_vertical_padding"
+                        android:textSize="24sp"
+                        android:paddingRight="@dimen/default_horizontal_padding"
+                        android:paddingLeft="@dimen/default_horizontal_padding"/>
+
+                <org.florescu.android.rangeseekbar.RangeSeekBar
+                        android:layout_width="match_parent"
+                        rsb:absoluteMaxValue="255"
+                        rsb:absoluteMinValue="0"
+                        rsb:textAboveThumbsColor="@android:color/holo_blue_dark"
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/sValueBar"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/default_horizontal_padding"
+                        android:paddingRight="@dimen/default_horizontal_padding"
+                        android:paddingTop="@dimen/default_vertical_padding"
+                        android:paddingBottom="@dimen/default_vertical_padding"
+                        android:scaleType="centerCrop"
+                        rsb:barHeight="4dp"
+                        rsb:showLabels="true"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                <TextView
+                        android:text="V Filter Value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="@dimen/default_vertical_padding"
+                        android:paddingTop="@dimen/default_vertical_padding"
+                        android:textSize="24sp"
+                        android:paddingRight="@dimen/default_horizontal_padding"
+                        android:paddingLeft="@dimen/default_horizontal_padding"/>
+
+                <org.florescu.android.rangeseekbar.RangeSeekBar
+                        android:layout_width="match_parent"
+                        rsb:absoluteMaxValue="255"
+                        rsb:absoluteMinValue="0"
+                        rsb:textAboveThumbsColor="@android:color/holo_blue_dark"
+                        android:layout_gravity="center_vertical"
+                        android:id="@+id/vValueBar"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="@dimen/default_horizontal_padding"
+                        android:paddingRight="@dimen/default_horizontal_padding"
+                        android:paddingTop="@dimen/default_vertical_padding"
+                        android:paddingBottom="@dimen/default_vertical_padding"
+                        rsb:showLabels="true"
+                        rsb:barHeight="4dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>
