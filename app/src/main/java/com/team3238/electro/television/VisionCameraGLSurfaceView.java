@@ -9,13 +9,8 @@ import android.widget.Toast;
 
 import com.team3238.electro.opencv.Camera2Renderer;
 import com.team3238.electro.opencv.CameraGLSurfaceView;
-import com.team3238.electro.opencv.CameraGLSurfaceView;
 
 import java.util.HashMap;
-
-/**
- * Created by aaron on 12/12/2016.
- */
 
 public class VisionCameraGLSurfaceView extends CameraGLSurfaceView
         implements CameraGLSurfaceView.CameraTextureListener
@@ -43,6 +38,11 @@ public class VisionCameraGLSurfaceView extends CameraGLSurfaceView
     public VisionCameraGLSurfaceView(Context context, AttributeSet attrs)
     {
         super(context, attrs, getCameraSettings());
+    }
+
+    public void openOptionsMenu()
+    {
+        ((Activity) getContext()).openOptionsMenu();
     }
 
     @Override

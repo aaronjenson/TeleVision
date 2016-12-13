@@ -1,12 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
     <com.team3238.electro.television.VisionCameraGLSurfaceView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/vision_view" />
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1">
+
+        <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/settings_button"
+                app:srcCompat="@android:drawable/ic_menu_manage"
+                android:layout_gravity="top|right"
+                android:onClick="createOptionsMenu"
+                android:visibility="visible"
+                android:elevation="4dp"
+                android:padding="@dimen/default_vertical_padding"
+                />
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/settings_container">
+    </LinearLayout>
 
 </FrameLayout>

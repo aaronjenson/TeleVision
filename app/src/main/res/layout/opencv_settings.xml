@@ -1,5 +1,4 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
              xmlns:rsb="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
              android:layout_gravity="bottom|center"
@@ -7,9 +6,8 @@
              android:padding="10dp"
              android:orientation="vertical"
              android:weightSum="1"
-             tools:context="com.team3238.electro.television.CameraSettings"
              android:layout_height="wrap_content"
-             android:id="@+id/camera_settings_fragment">
+             android:id="@+id/opencv_settings">
 
     <ScrollView
             android:layout_width="match_parent"

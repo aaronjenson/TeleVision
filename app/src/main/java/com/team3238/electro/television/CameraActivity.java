@@ -3,9 +3,9 @@ package com.team3238.electro.television;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -18,10 +18,12 @@ import org.opencv.android.LoaderCallbackInterface;
 import org.opencv.android.OpenCVLoader;
 
 public class CameraActivity extends AppCompatActivity
+        implements PopupMenu.OnMenuItemClickListener
 {
     private static final String TAG = "CameraActivity";
 
     VisionCameraGLSurfaceView visionView;
+    Dialog activeSettings;
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this)
     {
@@ -96,59 +98,84 @@ public class CameraActivity extends AppCompatActivity
         super.onDestroy();
     }
 
-    @Override public boolean onCreateOptionsMenu(Menu menu)
+    public void createOptionsMenu(View view)
     {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_camera, menu);
-        return true;
+        PopupMenu popup = new PopupMenu(this, view);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.menu_camera);
+        popup.show();
     }
 
-    @Override public boolean onOptionsItemSelected(MenuItem item)
+    private void openCVCameraSettings()
     {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        Log.i(TAG, "Calling openCVCameraSettings().");
 
-        //noinspection SimplifiableIfStatement
-        if(id == R.id.action_camera_settings)
+        if(activeSettings != null)
         {
-            openCameraSettings();
-        }
-        if(id == R.id.action_opencv_settings)
-        {
-            openCVSettings();
+            activeSettings.hide();
         }
 
-        return super.onOptionsItemSelected(item);
+        View view = getLayoutInflater().inflate(R.layout.opencv_settings, null);
+
+        Dialog cameraSettingsDialog = new Dialog(CameraActivity.this,
+                R.style.AppTheme_NoActionBar);
+        cameraSettingsDialog.setContentView(view);
+        cameraSettingsDialog.getWindow()
+                .setLayout(LinearLayout.LayoutParams.MATCH_PARENT, 1000);
+        cameraSettingsDialog.getWindow().setGravity(Gravity.BOTTOM);
+        cameraSettingsDialog.show();
+        activeSettings = cameraSettingsDialog;
+
+        RangeSeekBar<Integer> hBar = (RangeSeekBar<Integer>) view
+                .findViewById(R.id.hValueBar);
+        hBar.setSelectedMaxValue(254);
+        hBar.setSelectedMinValue(118);
+
+        RangeSeekBar<Integer> sBar = (RangeSeekBar<Integer>) view
+                .findViewById(R.id.sValueBar);
+        sBar.setSelectedMaxValue(230);
+        sBar.setSelectedMinValue(148);
+
+        RangeSeekBar<Integer> vBar = (RangeSeekBar<Integer>) view
+                .findViewById(R.id.vValueBar);
+        vBar.setSelectedMaxValue(118);
+        vBar.setSelectedMinValue(16);
     }
 
     private void openCameraSettings()
     {
         Log.i(TAG, "Calling openCameraSettings().");
 
-        View view = getLayoutInflater()
-                .inflate(R.layout.camera_settings, null);
-//        LinearLayout container = (LinearLayout) view
-//                .findViewById(R.id.camera_settings_fragment_container);
-
-        final Dialog cameraSettingsDialog = new Dialog(CameraActivity.this,
-                R.style.AppTheme_NoActionBar);
-        cameraSettingsDialog.setContentView(view);
-        cameraSettingsDialog.setCancelable(true);
-        cameraSettingsDialog.getWindow()
-                .setLayout(LinearLayout.LayoutParams.MATCH_PARENT, 680);
-        cameraSettingsDialog.getWindow().setGravity(Gravity.BOTTOM);
-        cameraSettingsDialog.show();
-
-        RangeSeekBar<Integer> hBar = (RangeSeekBar<Integer>) view
-                .findViewById(R.id.hValueBar);
-        hBar.setSelectedMaxValue(254);
-        hBar.setSelectedMinValue(118);
+        if(activeSettings != null)
+        {
+            activeSettings.hide();
+        }
     }
 
-    private void openCVSettings()
+    @Override public void onBackPressed()
     {
-        Log.i(TAG, "Calling openCVSettings().");
+        if(activeSettings != null)
+        {
+            activeSettings.hide();
+        } else
+        {
+            super.onBackPressed();
+        }
+    }
+
+    @Override public boolean onMenuItemClick(MenuItem item)
+    {
+        switch(item.getItemId())
+        {
+            case R.id.action_camera_settings:
+                openCameraSettings();
+                return true;
+            case R.id.action_opencv_settings:
+                openCVCameraSettings();
+                return true;
+            default:
+                Log.i(TAG, "Default onMenuItemClick() item case running");
+                return false;
+        }
     }
 }
